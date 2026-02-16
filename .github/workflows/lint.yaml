@@ -5,11 +5,17 @@ on: push
 
 jobs:
     lint: 
-        runs-on: ubuntu-latest
+        runs-on: ${{matrix.os}}
+
+        strategy:
+          matrix:
+            os: [ubuntu-latest, windows-latest, macos-latest]
 
         steps:
             - name: Chcekout code
               uses: actions/checkout@v3
+              with:
+                python-version: '3.10'
 
             - name: Setup Python
               uses: actions/setup-python@v4
